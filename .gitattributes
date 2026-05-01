@@ -1,0 +1,9 @@
+# 让 GitHub 忽略特定目录的语言统计
+build/** linguist-vendored
+dist/** linguist-vendored
+*.spec linguist-vendored
+
+# 或者直接排除这些目录（不参与统计）
+build/** linguist-documentation
+dist/** linguist-documentation
+*.spec linguist-documentation
