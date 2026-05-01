@@ -11,21 +11,75 @@ from colorama import init, Fore, Style
 CURRENT_LANG = "en"
 
 LC_CODE_DICT = {
-    "A": "/\\-", "B": "|__'__", "C": "___", "D": "|__", "E": "|---",
-    "F": "|--", "G": "___-", "H": "|-|", "I": "-|-", "J": "-|_",
-    "K": "|/\\", "L": "|-", "M": "|\\/|", "N": "|\\|", "O": "____",
-    "P": "|_", "Q": "____\\", "R": "|_\\", "S": "__", "T": "-|",
-    "U": "|_|", "V": "\\/", "W": "\\/\\/", "X": "/\\", "Y": "\\/|",
-    "Z": "-/-", "1": "|", "2": "_/-", "3": "___'___", "4": "/-|",
-    "5": "-|'_", "6": "_'____", "7": "-/", "8": "____'____",
-    "9": "____'_", "0": "_____|", ",": "/", ".": "'\\", "?": "_|'",
-    "'": "'", "!": "|'", "/": "//", "(": "/_", ")": "\\_/",
-    "&": "\\___/___", ":": "\\''", ";": "'/", "=": "--", "+": "\\-|",
-    "-": "-", "_": "\\_", '"': "''", "$": "__|__", "@": "___'____\\",
-    " ": "=", "\\": "\\\\", "~": "__'__", "#": "//--", "%": "____/____",
-    "^": "'/'\\", "*": "'''''", "[": "'|'", "]": "\\'|'",
-    "{": "_|_|_", "}": "\\_|_|_", "<": "\\/\\", ">": "\\\\/",
-    "`": "\\'", "|": "\\|"
+    "A": "/\\-",
+    "B": "|__'__",
+    "C": "___",
+    "D": "|__",
+    "E": "|---",
+    "F": "|--",
+    "G": "___-",
+    "H": "|-|",
+    "I": "-|-",
+    "J": "-|_",
+    "K": "|/\\",
+    "L": "|-",
+    "M": "|\\/|",
+    "N": "|\\|",
+    "O": "____",
+    "P": "|_",
+    "Q": "____\\",
+    "R": "|_\\",
+    "S": "__",
+    "T": "-|",
+    "U": "|_|",
+    "V": "\\/",
+    "W": "\\/\\/",
+    "X": "/\\",
+    "Y": "\\/|",
+    "Z": "-/-",
+    "1": "|",
+    "2": "_/-",
+    "3": "___'___",
+    "4": "/-|",
+    "5": "-|'_",
+    "6": "_'____",
+    "7": "-/",
+    "8": "____'____",
+    "9": "____'_",
+    "0": "_____|",
+    ",": "/",
+    ".": "'\\",
+    "?": "_|'",
+    "'": "'",
+    "!": "|'",
+    "/": "//",
+    "(": "/_",
+    ")": "\\_/",
+    "&": "\\___/___",
+    ":": "\\''",
+    ";": "'/",
+    "=": "--",
+    "+": "\\-|",
+    "-": "-",
+    "_": "\\_",
+    '"': "''",
+    "$": "__|__",
+    "@": "___'____\\",
+    " ": "=",
+    "\\": "\\\\",
+    "~": "__'__",
+    "#": "//--",
+    "%": "____/____",
+    "^": "'/'\\",
+    "*": "'''''",
+    "[": "'|'",
+    "]": "\\'|'",
+    "{": "_|_|_",
+    "}": "\\_|_|_",
+    "<": "\\/\\",
+    ">": "\\\\/",
+    "`": "\\'",
+    "|": "\\|",
 }
 LC_CODE_REVERSE_DICT = {v: k for k, v in LC_CODE_DICT.items()}
 
@@ -49,18 +103,19 @@ LANGUAGES = {
         "exit_message": "正在退出...",
         "empty_input": "输入为空！",
         "invalid_choice": "无效命令！",
-    }
+    },
 }
 
-EGG_COLORS = {
-    'red': 1, 'green': 2, 'blue': 6, 'yellow': 4, 'purple': 5, 'cyan': 7
-}
+EGG_COLORS = {"red": 1, "green": 2, "blue": 6, "yellow": 4, "purple": 5, "cyan": 7}
+
 
 def text_to_LC(text):
     return " ".join(LC_CODE_DICT.get(c.upper(), "?") for c in text)
 
+
 def LC_to_text(lc):
     return "".join(LC_CODE_REVERSE_DICT.get(code, "?") for code in lc.split())
+
 
 def select_language():
     print("Select language / 选择语言:")
@@ -71,8 +126,9 @@ def select_language():
             return "zh"
     except KeyboardInterrupt:
         print("\nExiting...")
-        sys.exit(0)          # ← 这里改用 sys.exit
+        sys.exit(0)  # ← 这里改用 sys.exit
     return "en"
+
 
 def run_once(args):
     # 启用彩色输出（一次性模式专用）
@@ -91,15 +147,15 @@ def run_once(args):
     if args.dict:
         lines = get_lc_dict_lines(CURRENT_LANG)
         for i, line in enumerate(lines):
-            if i == 0:                     # 标题
+            if i == 0:  # 标题
                 print(Fore.GREEN + Style.BRIGHT + line)
             elif line.startswith("  [") and line.endswith("]"):  # 分类名
                 print(Fore.CYAN + line)
-            elif line.startswith("-"):     # 分隔线
+            elif line.startswith("-"):  # 分隔线
                 print(Fore.CYAN + line)
-            elif line == "":               # 空行
+            elif line == "":  # 空行
                 print()
-            else:                          # 数据
+            else:  # 数据
                 print(Fore.YELLOW + line)
 
     # 版本信息
@@ -109,16 +165,26 @@ def run_once(args):
     # 彩蛋
     if args.egg:
         color_map = {
-            'red': Fore.RED, 'green': Fore.GREEN,
-            'blue': Fore.BLUE, 'yellow': Fore.YELLOW,
-            'purple': Fore.MAGENTA, 'cyan': Fore.CYAN
+            "red": Fore.RED,
+            "green": Fore.GREEN,
+            "blue": Fore.BLUE,
+            "yellow": Fore.YELLOW,
+            "purple": Fore.MAGENTA,
+            "cyan": Fore.CYAN,
         }
-        egg_color = args.egg.lower() if args.egg != 'list' else None
+        egg_color = args.egg.lower() if args.egg != "list" else None
         if egg_color and egg_color in color_map:
-            print(color_map[egg_color] + f"0 <= This is a {egg_color} Easter egg! :)" 
-                  if CURRENT_LANG == 'en' else f"0 <= 这是一个{egg_color}的彩蛋！ :)")
+            print(
+                color_map[egg_color] + f"0 <= This is a {egg_color} Easter egg! :)"
+                if CURRENT_LANG == "en"
+                else f"0 <= 这是一个{egg_color}的彩蛋！ :)"
+            )
         else:
-            print(Fore.GREEN + "Available egg colors: red, green, blue, yellow, purple, cyan")
+            print(
+                Fore.GREEN
+                + "Available egg colors: red, green, blue, yellow, purple, cyan"
+            )
+
 
 def get_system_lang():
     """
@@ -128,31 +194,33 @@ def get_system_lang():
     # 方法1：使用 locale.getlocale() （当前推荐）
     try:
         lang, _ = locale.getlocale(category=locale.LC_CTYPE)
-        if lang and lang.startswith('zh'):
-            return 'zh'
+        if lang and lang.startswith("zh"):
+            return "zh"
     except:
         pass
 
     # 方法2：环境变量（Linux/macOS 常用）
     try:
-        env_lang = os.environ.get('LANG', '')
-        if env_lang.startswith('zh'):
-            return 'zh'
+        env_lang = os.environ.get("LANG", "")
+        if env_lang.startswith("zh"):
+            return "zh"
     except:
         pass
 
     # 方法3：Windows API（仅在 Windows 上有效）
     try:
         import ctypes
+
         windll = ctypes.windll.kernel32
         lang_id = windll.GetUserDefaultUILanguage()
-        if lang_id in (0x0804, 0x0404, 0x0c04, 0x1004, 0x1404):
-            return 'zh'
+        if lang_id in (0x0804, 0x0404, 0x0C04, 0x1004, 0x1404):
+            return "zh"
     except:
         pass
 
     # 默认回退英文
-    return 'en'
+    return "en"
+
 
 def get_lc_dict_lines(lang):
     """
@@ -161,13 +229,13 @@ def get_lc_dict_lines(lang):
     """
     letters = [chr(i) for i in range(65, 91)]
     digits = [str(i) for i in range(10)]
-    symbols = [c for c in ",.?!/()&:;=+-_\"$@ \\~#%^*[]{}<>`|"]
+    symbols = [c for c in ',.?!/()&:;=+-_"$@ \\~#%^*[]{}<>`|']
 
     category_names = {
-        'en': ("Letters", "Digits", "Symbols"),
-        'zh': ("字母", "数字", "符号")
+        "en": ("Letters", "Digits", "Symbols"),
+        "zh": ("字母", "数字", "符号"),
     }
-    title = "LC Code Dictionary:" if lang == 'en' else "线段密码字典："
+    title = "LC Code Dictionary:" if lang == "en" else "线段密码字典："
     names = category_names[lang]
 
     def block(items, cat_name):
@@ -193,6 +261,7 @@ def get_lc_dict_lines(lang):
         result.append("-" * 65)
     return result
 
+
 # ================== CURSES 类 ==================
 class LctCursesApp:
     def __init__(self, stdscr):
@@ -202,10 +271,10 @@ class LctCursesApp:
         self.running = True
         self.cmd_history = []
         self.has_output = False
-        self.last_h = self.last_w = 0               # 记录上次终端尺寸
+        self.last_h = self.last_w = 0  # 记录上次终端尺寸
 
         self.setup_colors()
-        self.create_windows()                       # 初始创建
+        self.create_windows()  # 初始创建
         self.mid_win.scrollok(True)
         self.add_message("Welcome to LCT v1.3\nType /help for help.\n")
         self.draw_top_bar()
@@ -224,13 +293,13 @@ class LctCursesApp:
         curses.init_pair(5, curses.COLOR_MAGENTA, -1)
         curses.init_pair(6, curses.COLOR_BLUE, -1)
         curses.init_pair(7, curses.COLOR_CYAN, -1)
-        self.COLOR_TOP    = curses.color_pair(1)
-        self.COLOR_GREEN  = curses.color_pair(2)
-        self.COLOR_RED    = curses.color_pair(3)
+        self.COLOR_TOP = curses.color_pair(1)
+        self.COLOR_GREEN = curses.color_pair(2)
+        self.COLOR_RED = curses.color_pair(3)
         self.COLOR_YELLOW = curses.color_pair(4)
-        self.COLOR_MAGENTA= curses.color_pair(5)
-        self.COLOR_BLUE   = curses.color_pair(6)
-        self.COLOR_CYAN   = curses.color_pair(7)
+        self.COLOR_MAGENTA = curses.color_pair(5)
+        self.COLOR_BLUE = curses.color_pair(6)
+        self.COLOR_CYAN = curses.color_pair(7)
 
     def create_windows(self):
         """根据当前终端尺寸创建窗口，并记录尺寸"""
@@ -238,27 +307,27 @@ class LctCursesApp:
         if h < 10 or w < 60:
             raise RuntimeError("终端窗口太小，请至少调整到 60x10")
         self.top_win = curses.newwin(1, w, 0, 0)
-        self.bot_win = curses.newwin(1, w, h-2, 0)
-        self.input_win = curses.newwin(1, w, h-1, 0)
-        self.mid_win = curses.newwin(h-3, w, 1, 0)
+        self.bot_win = curses.newwin(1, w, h - 2, 0)
+        self.input_win = curses.newwin(1, w, h - 1, 0)
+        self.mid_win = curses.newwin(h - 3, w, 1, 0)
         self.last_h, self.last_w = h, w
 
     def adjust_windows_if_resized(self):
         """如果终端尺寸变化，移动并调整现有窗口大小（保留内容）"""
         h, w = self.stdscr.getmaxyx()
         if h == self.last_h and w == self.last_w:
-            return False   # 尺寸未变
+            return False  # 尺寸未变
 
         # 调整各窗口位置和尺寸
         try:
             self.top_win.mvwin(0, 0)
             self.top_win.resize(1, w)
-            self.bot_win.mvwin(h-2, 0)
+            self.bot_win.mvwin(h - 2, 0)
             self.bot_win.resize(1, w)
-            self.input_win.mvwin(h-1, 0)
+            self.input_win.mvwin(h - 1, 0)
             self.input_win.resize(1, w)
             self.mid_win.mvwin(1, 0)
-            self.mid_win.resize(h-3, w)
+            self.mid_win.resize(h - 3, w)
             self.mid_win.scrollok(True)
         except curses.error:
             raise RuntimeError("终端窗口太小，请至少调整到 60x10")
@@ -271,9 +340,13 @@ class LctCursesApp:
 
     def draw_top_bar(self):
         w = self.top_win.getmaxyx()[1]
-        title = " LCT v1.3   |   飙志   |   /help " if self.lang=="zh" else " LCT v1.3   |   BiaoZyx   |   /help "
+        title = (
+            " LCT v1.3   |   飙志   |   /help "
+            if self.lang == "zh"
+            else " LCT v1.3   |   BiaoZyx   |   /help "
+        )
         disp = title.center(w)[:w]
-        self.top_win.bkgd(' ', self.COLOR_TOP)
+        self.top_win.bkgd(" ", self.COLOR_TOP)
         try:
             self.top_win.addstr(0, 0, disp)
         except curses.error:
@@ -283,12 +356,15 @@ class LctCursesApp:
     def draw_bottom_bar(self):
         """绘制底部快捷键栏，强制固定在倒数第二行"""
         h, w = self.stdscr.getmaxyx()
-        self.bot_win.mvwin(h-2, 0)          # 重新定位到正确位置
-        self.bot_win.resize(1, w)            # 确保尺寸正确
-        bar = (" [1]文本→LC [2]LC→文本 [3]字典 [/menu] [/help] [/exit] [/history] " if self.lang=="zh"
-               else " [1]Text→LC [2]LC→Text [3]Dict [/menu] [/help] [/exit] [/history] ")
+        self.bot_win.mvwin(h - 2, 0)  # 重新定位到正确位置
+        self.bot_win.resize(1, w)  # 确保尺寸正确
+        bar = (
+            " [1]文本→LC [2]LC→文本 [3]字典 [/menu] [/help] [/exit] [/history] "
+            if self.lang == "zh"
+            else " [1]Text→LC [2]LC→Text [3]Dict [/menu] [/help] [/exit] [/history] "
+        )
         disp = bar.center(w)[:w]
-        self.bot_win.bkgd(' ', self.COLOR_TOP)
+        self.bot_win.bkgd(" ", self.COLOR_TOP)
         try:
             self.bot_win.addstr(0, 0, disp)
         except curses.error:
@@ -310,7 +386,7 @@ class LctCursesApp:
                 y, _ = self.mid_win.getyx()
                 if y >= h - 1:
                     self.mid_win.scroll(1)
-                    self.mid_win.move(h-1, 0)
+                    self.mid_win.move(h - 1, 0)
                 try:
                     self.mid_win.addstr(sub + "\n", color)
                 except curses.error:
@@ -322,8 +398,8 @@ class LctCursesApp:
         if self.has_output:
             w = self.mid_win.getmaxyx()[1]
             try:
-                self.mid_win.addstr("\n")
-                self.mid_win.addstr("─" * w + "\n", self.COLOR_CYAN)
+                # self.mid_win.addstr("\n")
+                self.mid_win.addstr("\n" + "─" * w + "\n", self.COLOR_CYAN)
             except curses.error:
                 pass
             self.mid_win.refresh()
@@ -331,10 +407,10 @@ class LctCursesApp:
     def get_input(self, prompt=""):
         curses.flushinp()
         h, w = self.stdscr.getmaxyx()
-        self.input_win.mvwin(h-1, 0)
+        self.input_win.mvwin(h - 1, 0)
         self.input_win.resize(1, w)
         self.input_win.erase()
-        self.input_win.bkgd(' ', 0)
+        self.input_win.bkgd(" ", 0)
 
         # 计算提示符在终端中的实际列宽，并截断到安全长度
         prompt_disp_width = wcswidth(prompt)
@@ -350,7 +426,7 @@ class LctCursesApp:
         self.input_win.refresh()
 
         # 光标位置使用显示宽度
-        cursor_pos = min(prompt_disp_width, w-1)
+        cursor_pos = min(prompt_disp_width, w - 1)
         self.input_win.move(0, cursor_pos)
 
         curses.echo()
@@ -362,46 +438,50 @@ class LctCursesApp:
         curses.noecho()
         curses.curs_set(0)
 
-        out = s.decode('utf-8', errors='ignore').strip()
+        out = s.decode("utf-8", errors="ignore").strip()
 
         self.input_win.erase()
-        self.input_win.bkgd(' ', 0)
+        self.input_win.bkgd(" ", 0)
         try:
             self.input_win.addstr(0, 0, prompt_safe, self.COLOR_BLUE)
         except:
             pass
         self.input_win.refresh()
 
-        if not out or out[0] == '\x1b' or all(ord(c) < 32 for c in out):
+        if not out or out[0] == "\x1b" or all(ord(c) < 32 for c in out):
             out = ""
         return out
 
     # ---------- 信息展示（菜单、版本、帮助、字典） ----------
     def show_menu(self):
         # 原有代码不变
-        items = [
-            "1            : text to LC code",
-            "2            : LC code to text",
-            "3            : LC code dictionary",
-            "/menu        : show this menu",
-            "/version     : version info",
-            "/help        : detailed help",
-            "/clear       : clear screen",
-            "/history     : command history",
-            "/exit        : exit",
-            "/egg <color> : Easter egg",
-        ] if self.lang=="en" else [
-            "1           ：文本转线段密码",
-            "2           ：线段密码转文本",
-            "3           ：线段密码字典",
-            "/menu       ：显示菜单",
-            "/version    ：版本信息",
-            "/help       ：帮助",
-            "/clear      ：清屏",
-            "/history    ：命令历史",
-            "/exit       ：退出",
-            "/egg <颜色> ：彩蛋",
-        ]
+        items = (
+            [
+                "1            : text to LC code",
+                "2            : LC code to text",
+                "3            : LC code dictionary",
+                "/menu        : show this menu",
+                "/version     : version info",
+                "/help        : detailed help",
+                "/clear       : clear screen",
+                "/history     : command history",
+                "/exit        : exit",
+                "/egg <color> : Easter egg",
+            ]
+            if self.lang == "en"
+            else [
+                "1           ：文本转线段密码",
+                "2           ：线段密码转文本",
+                "3           ：线段密码字典",
+                "/menu       ：显示菜单",
+                "/version    ：版本信息",
+                "/help       ：帮助",
+                "/clear      ：清屏",
+                "/history    ：命令历史",
+                "/exit       ：退出",
+                "/egg <颜色> ：彩蛋",
+            ]
+        )
         self.add_message("", self.COLOR_MAGENTA)
         for line in items:
             self.add_message("  ●  " + line, self.COLOR_MAGENTA)
@@ -409,21 +489,25 @@ class LctCursesApp:
 
     def show_version(self):
         ver = (
-            " _     ____ _____          _   _____\n"
-            "| |   / ___|_   _|  __   _/ | |___ /\n"
-            "| |  | |     | |____\\ \\ / / |   |_ \\\n"
-            "| |__| |___  | |_____\\ V /| |_ ___) |\n"
-            "|_____\\____| |_|      \\_/ |_(_)____/\n"
-            "Version : 1.3  Date : 2026-5-1\n"
-            "Author : BiaoZyx"
-        ) if self.lang=="en" else (
-            " _     ____ _____          _   _____\n"
-            "| |   / ___|_   _|  __   _/ | |___ /\n"
-            "| |  | |     | |____\\ \\ / / |   |_ \\\n"
-            "| |__| |___  | |_____\\ V /| |_ ___) |\n"
-            "|_____\\____| |_|      \\_/ |_(_)____/\n"
-            "版本：1.3  日期：2026-5-1\n"
-            "作者：飙志"
+            (
+                " _     ____ _____          _   _____\n"
+                "| |   / ___|_   _|  __   _/ | |___ /\n"
+                "| |  | |     | |____\\ \\ / / |   |_ \\\n"
+                "| |__| |___  | |_____\\ V /| |_ ___) |\n"
+                "|_____\\____| |_|      \\_/ |_(_)____/\n"
+                "Version : 1.3  Date : 2026-5-1\n"
+                "Author : BiaoZyx"
+            )
+            if self.lang == "en"
+            else (
+                " _     ____ _____          _   _____\n"
+                "| |   / ___|_   _|  __   _/ | |___ /\n"
+                "| |  | |     | |____\\ \\ / / |   |_ \\\n"
+                "| |__| |___  | |_____\\ V /| |_ ___) |\n"
+                "|_____\\____| |_|      \\_/ |_(_)____/\n"
+                "版本：1.3  日期：2026-5-1\n"
+                "作者：飙志"
+            )
         )
         self.add_message(ver, self.COLOR_GREEN)
 
@@ -503,15 +587,23 @@ class LctCursesApp:
             if cmd == "1":
                 txt = self.get_input(self.text["enter_text"])
                 if txt:
-                    self.add_message(f">>> {self.text['enter_text']}{txt}", self.COLOR_CYAN)
-                    self.add_message(self.text["translated_LC"] + text_to_LC(txt), self.COLOR_GREEN)
+                    self.add_message(
+                        f">>> {self.text['enter_text']}{txt}", self.COLOR_CYAN
+                    )
+                    self.add_message(
+                        self.text["translated_LC"] + text_to_LC(txt), self.COLOR_GREEN
+                    )
                 else:
                     self.add_message(self.text["empty_input"], self.COLOR_RED)
             elif cmd == "2":
                 lc = self.get_input(self.text["enter_LC"])
                 if lc:
-                    self.add_message(f">>> {self.text['enter_LC']}{lc}", self.COLOR_CYAN)
-                    self.add_message(self.text["translated_text"] + LC_to_text(lc), self.COLOR_GREEN)
+                    self.add_message(
+                        f">>> {self.text['enter_LC']}{lc}", self.COLOR_CYAN
+                    )
+                    self.add_message(
+                        self.text["translated_text"] + LC_to_text(lc), self.COLOR_GREEN
+                    )
                 else:
                     self.add_message(self.text["empty_input"], self.COLOR_RED)
             elif cmd == "3":
@@ -527,13 +619,17 @@ class LctCursesApp:
                 self.mid_win.refresh()
                 self.has_output = False
             elif cmd in ("/history", "/hist"):
-                start = max(0, len(self.cmd_history)-20)
+                start = max(0, len(self.cmd_history) - 20)
                 for i in range(start, len(self.cmd_history)):
-                    self.add_message(f"{i-start+1:3d}: {self.cmd_history[i]}", self.COLOR_MAGENTA)
+                    self.add_message(
+                        f"{i - start + 1:3d}: {self.cmd_history[i]}", self.COLOR_MAGENTA
+                    )
             elif cmd.startswith("/egg"):
                 parts = cmd.split()
-                if len(parts)==1:
-                    self.add_message("Available: red,green,blue,yellow,purple,cyan", self.COLOR_GREEN)
+                if len(parts) == 1:
+                    self.add_message(
+                        "Available: red,green,blue,yellow,purple,cyan", self.COLOR_GREEN
+                    )
                 elif parts[1] in EGG_COLORS:
                     self.add_message(f"0 <= {parts[1]} egg! :)", self.COLOR_GREEN)
                 else:
@@ -545,18 +641,28 @@ class LctCursesApp:
                 self.add_message(self.text["empty_input"], self.COLOR_RED)
             else:
                 self.add_message(self.text["invalid_choice"], self.COLOR_RED)
-                
+
+
 # ================== 主入口 ==================
 def main():
     global CURRENT_LANG
 
     parser = argparse.ArgumentParser(description="LC Code Translator")
-    parser.add_argument('-t', '--text', help='Text to translate to LC code')
-    parser.add_argument('-l', '--lc', help='LC code to translate to text (separate codes by space)')
-    parser.add_argument('--dict', action='store_true', help='Show LC code dictionary')
-    parser.add_argument('--version', action='store_true', help='Show version info')
-    parser.add_argument('--egg', nargs='?', const='list', help='Easter egg, optionally give a color name')
-    parser.add_argument('--lang', choices=['en', 'zh'], default=None, help='Force language (en/zh)')
+    parser.add_argument("-t", "--text", help="Text to translate to LC code")
+    parser.add_argument(
+        "-l", "--lc", help="LC code to translate to text (separate codes by space)"
+    )
+    parser.add_argument("--dict", action="store_true", help="Show LC code dictionary")
+    parser.add_argument("--version", action="store_true", help="Show version info")
+    parser.add_argument(
+        "--egg",
+        nargs="?",
+        const="list",
+        help="Easter egg, optionally give a color name",
+    )
+    parser.add_argument(
+        "--lang", choices=["en", "zh"], default=None, help="Force language (en/zh)"
+    )
     args = parser.parse_args()
 
     # ---------- 语言设置 ----------
