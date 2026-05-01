@@ -1,4 +1,14 @@
-<<<<<<< HEAD
+# v1.0版本基于 *MCT-v1.6*的Python代码。
+
+# LCT - Line Cipher Translator
+
+**线段密码翻译器**，支持文本与线段密码的双向转换，提供 **Nano 风格全屏界面** 和 **命令行一次性模式**。
+
+![Version](https://img.shields.io/badge/version-1.3-blue)
+![License](https://img.shields.io/badge/license-GPLv3-green)
+
+---
+
 我发明了一个名叫“线段密码”的神奇玩意儿。
 
 这款密码的特点是：乱——没错！  
@@ -13,14 +23,6 @@
 5. `_`：表示圆弧（1/4圆）
    那么我将这些组合按笔顺拆开每个字符，就组成了线段密码（不知道我怎么想出来的……）
 
-# v1.0版本基于 *MCT-v1.6*的Python代码。
-
-# LCT - Line Cipher Translator
-
-**线段密码翻译器**，支持文本与线段密码的双向转换，提供 **Nano 风格全屏界面** 和 **命令行一次性模式**。
-
-![Version](https://img.shields.io/badge/version-1.3-blue)
-![License](https://img.shields.io/badge/license-GPLv3-green)
 
 ---
 
